@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <!-- media query setup -->
@@ -16,13 +16,13 @@
 <body class="inside">
   <!-- Beginning header -->
   <div class="container"> 
-  <header>
+  <header role="banner">
     <!-- Beginning nav -->
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
+    <ul id="breadcrumb" aria-label="Breadcrumb trails" role="navigation">
       <li><a href="/">Home</a></li>
     </ul>
     <!-- End breadcrumb -->
@@ -31,31 +31,33 @@
   <!-- End header -->
 
   <!-- Beginning main -->
-  <main id="maincontent">
+  <main id="maincontent" role="main">
     <!-- Beginning map -->
-    <section id="map-container">
+    <section id="map-container" role="application" aria-label="Mapbox Map">
       <div id="map"></div>
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container">
-      <h1 id="restaurant-name"></h1>
+    <section id="restaurant-container" role="region" aria-label="Resturant information">
+      <h1 id="restaurant-name" tabindex="0"></h1>
+      <figure>
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
+    </figure>
       <p id="restaurant-address"></p>
-      <table id="restaurant-hours"></table>
+      <table id="restaurant-hours" aria-label="Restaurant hours opening time"  tabindex="0" ></table>
     </section>
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container">
-      <ul id="reviews-list"></ul>
+    <section id="reviews-container" role="region" aria-label="Reviews"  tabindex="0">
+      <ul id="reviews-list" aria-label="Reviews list"></ul>
     </section>
     <!-- End reviews -->
   </main>
   <!-- End main -->
 
   <!-- Beginning footer -->
-  <footer id="footer">
+  <footer id="footer" role="contentinfo">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
   <!-- End footer -->

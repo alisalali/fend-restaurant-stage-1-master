@@ -24,9 +24,9 @@ initMap = () => {
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
         mapboxToken: 'pk.eyJ1IjoiYWxpc2FsYWxpIiwiYSI6ImNqeGMxa2V4MzAzaTUzeHM1dGRmYXR5bTMifQ.ex1SBfKnEhpy1wdvTDnU2g',
         maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/" tabindex="-1">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/" tabindex="-1">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/"  tabindex="-1">Mapbox</a>',
         id: 'mapbox.streets'    
       }).addTo(newMap);
       fillBreadcrumb();
@@ -82,15 +82,19 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.setAttribute('aria-label',`${restaurant.name} restaurant`)
 
   const address = document.getElementById('restaurant-address');
+  address.setAttribute('aria-label',`Restaurant address ${restaurant.address}`)
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
+  image.setAttribute('alt',`${restaurant.name} resturant in ${restaurant.address} ${restaurant.neighborhood}`)
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.setAttribute('aria-label',`Type of restaurant ${restaurant.cuisine_type}`)
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -140,6 +144,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   reviews.forEach(review => {
     ul.appendChild(createReviewHTML(review));
   });
+  ul.setAttribute('aria-label','Review list');
   container.appendChild(ul);
 }
 
@@ -148,10 +153,14 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  
+  li.setAttribute('aria-label',`Review item`);
   // Review header div  
   const reviewheader = document.createElement('div');
   reviewheader.className ='review-header';
+  reviewheader.setAttribute('aria-label',`Reviewd by ${review.name} in ${review.date}`);
+  reviewheader.setAttribute('role','heading')
+  reviewheader.setAttribute('tabindex','0');
+  
   
   
   const name = document.createElement('p');
